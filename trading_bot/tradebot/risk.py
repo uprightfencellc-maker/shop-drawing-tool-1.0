@@ -35,6 +35,8 @@ class RiskManager:
     def check(self, req: OrderRequest, account: Account, price: float | None, market_open: bool) -> list[str]:
         s, errs = self.s, []
 
+        if (s.state_dir / "HALT").exists():
+            return [f"trading halted by operator ({s.state_dir / 'HALT'} exists); place no orders this session"]
         if not market_open:
             errs.append("market is closed; orders are only allowed during the regular session")
         if not SYMBOL_RE.match(req.symbol):

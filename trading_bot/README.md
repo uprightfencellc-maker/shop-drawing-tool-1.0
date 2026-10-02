@@ -56,7 +56,17 @@ In live mode the bot asks you to confirm each order in the terminal unless you a
 
 ```bash
 python -m tradebot run --live             # real orders, confirm each one
+python -m tradebot loop --live --no-confirm --interval 30   # fully autonomous
 ```
+
+Checklist before going live:
+1. Edit `.env`: set `TRADING_MODE=live` and size the risk limits to money you can afford to lose.
+   They apply per order and per day, not to the account total, so consider `SYMBOL_ALLOWLIST` too.
+2. Run `python -m tradebot status --live` and check that cash, equity and positions match the Robinhood app.
+3. Run a few sessions with confirmation on before you use `--no-confirm`.
+
+**Stop switch:** `touch state/HALT` blocks every new order right away, even in a running loop.
+Delete the file to resume. It doesn't cancel orders already at Robinhood; cancel those in the app.
 
 ## Risk limits (`.env`)
 

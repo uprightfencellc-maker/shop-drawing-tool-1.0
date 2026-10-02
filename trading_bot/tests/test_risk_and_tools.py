@@ -117,3 +117,29 @@ def test_daily_state_rolls_over(tmp_path):
 def test_indicators():
     assert sma([1, 2, 3], 3) == 2
     assert rsi(list(range(1, 30))) == 100.0
+
+
+def test_halt_file_blocks_all_orders(env):
+    (env["settings"].state_dir / "HALT").touch()
+    out, err = place(env["ex"], notional_usd=100)
+    assert err and "halted" in out["error"]
+
+
+def test_live_broker_routes_fractional_quantity(env):
+    from types import SimpleNamespace as NS
+    from tradebot.broker import LiveRobinhoodBroker
+    from tradebot.models import OrderRequest
+
+    calls = []
+    rec = lambda name: (lambda *a, **k: calls.append((name, a)) or {"id": "x", "state": "queued"})
+    orders = NS(**{n: rec(n) for n in ["order_buy_market", "order_sell_market",
+                                       "order_buy_fractional_by_quantity", "order_sell_fractional_by_quantity",
+                                       "order_buy_fractional_by_price", "order_sell_fractional_by_price",
+                                       "order_buy_limit", "order_sell_limit"]})
+    b = LiveRobinhoodBroker(NS(rh=NS(orders=orders)))
+    b.place_order(OrderRequest("AAPL", "sell", quantity=2.5), 200)
+    b.place_order(OrderRequest("AAPL", "buy", quantity=3.0), 200)
+    b.place_order(OrderRequest("AAPL", "buy", notional_usd=50), 200)
+    assert [c[0] for c in calls] == ["order_sell_fractional_by_quantity", "order_buy_market",
+                                     "order_buy_fractional_by_price"]
+    assert calls[1][1] == ("AAPL", 3)

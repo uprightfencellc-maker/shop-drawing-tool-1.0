@@ -191,9 +191,13 @@ class LiveRobinhoodBroker(Broker):
         elif req.notional_usd is not None:
             fn = o.order_buy_fractional_by_price if req.side == "buy" else o.order_sell_fractional_by_price
             resp = fn(req.symbol, round(req.notional_usd, 2), timeInForce="gfd")
+        elif req.quantity != int(req.quantity):
+            # order_buy/sell_market only take whole shares; fractional quantities need these.
+            fn = o.order_buy_fractional_by_quantity if req.side == "buy" else o.order_sell_fractional_by_quantity
+            resp = fn(req.symbol, round(req.quantity, 6), timeInForce="gfd")
         else:
             fn = o.order_buy_market if req.side == "buy" else o.order_sell_market
-            resp = fn(req.symbol, req.quantity, timeInForce="gfd")
+            resp = fn(req.symbol, int(req.quantity), timeInForce="gfd")
 
         if not isinstance(resp, dict) or "id" not in resp:
             msg = resp.get("detail") or resp.get("non_field_errors") or resp if isinstance(resp, dict) else resp
