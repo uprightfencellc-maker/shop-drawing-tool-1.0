@@ -1,6 +1,6 @@
 # Gebhart Construction website: shared build rules
 
-Every agent working in `website/` follows this file. Do not touch anything outside `website/` (especially `trading_bot/`).
+Every agent working in `sites/gebhart-construction/` follows this file. Do not touch anything outside it (especially `trading_bot/`).
 
 ## Source of truth
 

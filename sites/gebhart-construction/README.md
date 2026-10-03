@@ -46,7 +46,7 @@ grep -rn "Todo label" src/
 ## Deploy (Netlify)
 
 1. In Netlify: **Add new site → Import an existing project**, then pick this repo.
-2. Set **Base directory** to `website`. The build command and publish folder come from `netlify.toml`.
+2. Set **Base directory** to `sites/gebhart-construction`. The build command and publish folder come from `netlify.toml`.
 3. Under **Forms**, turn on form detection, then redeploy so the `estimate` form is picked up.
 4. Under **Forms → Form notifications**, add an email notification to gebhartconst@gmail.com.
 5. Point the domain gebhartconstruction.com at the Netlify site (Domain management).
