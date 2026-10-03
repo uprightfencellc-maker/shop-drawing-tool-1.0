@@ -1,0 +1,111 @@
+---
+import { business, telHref, servicesByGroup } from '../lib/site';
+const path = Astro.url.pathname;
+const nav = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: 'Projects', href: '/projects/' },
+  { name: 'About', href: '/about/' },
+  { name: 'Reviews', href: '/reviews/' },
+  { name: 'Contact', href: '/contact/' },
+];
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const groups = [
+  { name: 'Exterior', items: servicesByGroup('Exterior') },
+  { name: 'Interior', items: servicesByGroup('Interior') },
+];
+---
+<header class="on-brand sticky top-0 z-40 border-b border-white/10">
+  <div class="container-site flex h-16 items-center justify-between gap-4 md:h-20">
+    <a href="/" class="font-heading whitespace-nowrap text-lg leading-tight font-extrabold tracking-wide !text-on-brand no-underline 2xl:text-xl" aria-label="Gebhart Construction home">
+      GEBHART <span class="text-accent">CONSTRUCTION</span>
+    </a>
+
+    <nav aria-label="Main" class="hidden xl:block">
+      <ul class="flex items-center">
+        {nav.map((item) => item.name === 'Services' ? (
+          <li class="relative" data-submenu>
+            <div class="flex items-center">
+              <a href={item.href} class="rounded px-3 py-2 font-semibold no-underline hover:underline aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:decoration-2" aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.name}</a>
+              <button type="button" class="-ml-2 flex h-11 w-8 items-center justify-center rounded" aria-expanded="false" aria-controls="services-menu" data-submenu-toggle>
+                <span class="sr-only">Show service pages</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M5.3 7.3a1 1 0 011.4 0L10 10.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4z" /></svg>
+              </button>
+            </div>
+            <div id="services-menu" hidden class="absolute left-0 top-full mt-1 grid w-[30rem] grid-cols-2 gap-6 rounded-lg bg-white p-6 text-ink shadow-xl">
+              {groups.map((g) => (
+                <div>
+                  <p class="text-sm font-semibold uppercase tracking-wide text-muted">{g.name}</p>
+                  <ul class="mt-2 space-y-1">
+                    {g.items.map((s) => (
+                      <li><a href={`/services/${s.slug}/`} class="block rounded py-1.5 !text-link" aria-current={path === `/services/${s.slug}/` ? 'page' : undefined}>{s.name}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </li>
+        ) : (
+          <li><a href={item.href} class="rounded px-3 py-2 font-semibold no-underline hover:underline aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:decoration-2" aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.name}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hidden items-center gap-4 xl:flex">
+      <a href={telHref} class="hidden whitespace-nowrap font-semibold 2xl:inline">{business.phone.display}</a>
+      <a href="/contact/" class="btn btn-primary whitespace-nowrap">Free Estimate</a>
+    </div>
+
+    <button type="button" class="flex h-11 w-11 items-center justify-center rounded xl:hidden" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+      <span class="sr-only">Menu</span>
+      <svg aria-hidden="true" viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" aria-label="Main" hidden class="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 xl:hidden">
+    <ul class="container-site space-y-1 py-4">
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} class="block rounded px-2 py-3 text-lg font-semibold no-underline" aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.name}</a>
+          {item.name === 'Services' && (
+            <ul class="mb-2 ml-4 border-l border-white/20 pl-3">
+              {servicesByGroup('Exterior').concat(servicesByGroup('Interior')).map((s) => (
+                <li><a href={`/services/${s.slug}/`} class="block py-2 !text-on-brand-muted">{s.name}</a></li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+      <li class="pt-2"><a href="/contact/" class="btn btn-primary w-full">Free Estimate</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  function setup(toggle: HTMLButtonElement, panel: HTMLElement, closeOnOutside: boolean) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+    };
+    toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        toggle.focus();
+      }
+    });
+    if (closeOnOutside) {
+      const root = toggle.closest('[data-submenu]')!;
+      document.addEventListener('click', (e) => { if (!root.contains(e.target as Node)) set(false); });
+      root.addEventListener('focusout', (e) => {
+        if (!root.contains((e as FocusEvent).relatedTarget as Node)) set(false);
+      });
+    }
+  }
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-menu');
+  if (menuBtn && menu) setup(menuBtn, menu, false);
+  const subBtn = document.querySelector<HTMLButtonElement>('[data-submenu-toggle]');
+  const sub = document.getElementById('services-menu');
+  if (subBtn && sub) setup(subBtn, sub, true);
+</script>

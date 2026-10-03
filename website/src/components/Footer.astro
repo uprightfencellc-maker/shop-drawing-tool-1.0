@@ -1,0 +1,55 @@
+---
+import Todo from './Todo.astro';
+import { business, telHref, smsHref, mailHref, hoursRows, servicesByGroup } from '../lib/site';
+const year = new Date().getFullYear();
+---
+<footer class="on-brand pb-24 pt-14 md:pb-10">
+  <div class="container-site grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <p class="font-heading text-lg font-extrabold">GEBHART <span class="text-accent">CONSTRUCTION</span></p>
+      <p class="mt-2 text-on-brand-muted">{business.tagline}</p>
+      <address class="mt-4 not-italic text-on-brand-muted">
+        {business.address.street}<br />
+        {business.address.city}, {business.address.region} {business.address.postalCode}
+      </address>
+      <p class="mt-3"><a href={telHref} class="font-semibold">{business.phone.display}</a> · <a href={smsHref}>Text</a></p>
+      <p class="mt-1"><a href={mailHref} class="break-all">{business.email}</a></p>
+    </div>
+    <div>
+      <h2 class="text-base">Services</h2>
+      <ul class="mt-3 space-y-1.5">
+        {servicesByGroup('Exterior').concat(servicesByGroup('Interior')).map((s) => (
+          <li><a href={`/services/${s.slug}/`} class="!text-on-brand-muted">{s.name}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <h2 class="text-base">Hours</h2>
+      <dl class="mt-3 space-y-1 text-on-brand-muted">
+        {hoursRows.map((h) => (
+          <div class="flex justify-between gap-3">
+            <dt>{h.days.slice(0, 3)}</dt>
+            <dd class="text-right">
+              {h.closed ? 'Closed' : !h.opens && !h.closes ? <span class="text-sm">TBD</span> : (
+                <>{h.opens ?? 'TBD'} – {h.closes ?? 'TBD'}</>
+              )}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    <div>
+      <h2 class="text-base">Service area</h2>
+      <p class="mt-3"><Todo label="SERVICE AREA" /></p>
+      <h2 class="mt-6 text-base">Follow us</h2>
+      <ul class="mt-3 space-y-1.5">
+        <li><a href={business.social.facebook} rel="noopener">Facebook</a></li>
+        <li><a href={business.social.instagram} rel="noopener">Instagram</a></li>
+        <li><a href={business.ratings.angi.url} rel="noopener">Angi reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-site mt-10 border-t border-white/15 pt-6 text-sm text-on-brand-muted">
+    © {year} {business.name}. All rights reserved.
+  </div>
+</footer>

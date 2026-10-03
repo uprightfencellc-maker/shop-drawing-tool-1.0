@@ -1,0 +1,15 @@
+{
+  "_note": "Only one photo exists so far (from the current site). Ask Ryan for full-size photos, before/after pairs, the service and the city for each. A project with both 'before' and 'after' renders as a before/after slider.",
+  "projects": [
+    {
+      "id": "interior-01",
+      "title": "Interior project",
+      "service": null,
+      "city": null,
+      "image": "interior-project-kitchen-living-room-01.jpg",
+      "alt": "Open kitchen and living room with a white island, granite countertop and wood-look floors",
+      "before": null,
+      "after": null
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { business, telHref } from '../lib/site';
+---
+<BaseLayout title="Thanks | Gebhart Construction" description="Your estimate request was sent to Gebhart Construction." noindex>
+  <section class="py-20 md:py-28">
+    <div class="container-site prose-site">
+      <h1>Thanks. Your request was sent.</h1>
+      <p class="mt-4 text-lg">Ryan will get back to you. If it's urgent, call <a href={telHref}>{business.phone.display}</a>.</p>
+      <a href="/" class="btn btn-outline-dark mt-8">Back to home</a>
+    </div>
+  </section>
+</BaseLayout>

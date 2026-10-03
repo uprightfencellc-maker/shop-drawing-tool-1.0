@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTABand from '../../components/CTABand.astro';
+import { business, servicesByGroup } from '../../lib/site';
+const site = Astro.site!;
+const crumbs = [{ name: 'Services', href: '/services/' }];
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: site.href },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: new URL('/services/', site).href },
+  ],
+};
+---
+<BaseLayout
+  title="Roofing, Siding & Remodeling Services in Huber Heights, OH | Gebhart Construction"
+  description="Roofing, siding, exterior repair, kitchen, bathroom and basement remodeling, and interior repair from Gebhart Construction in Huber Heights, OH. Free estimates."
+  jsonLd={[breadcrumbLd]}
+>
+  <PageHeader title="Our services" lead={business.supportingLine} crumbs={crumbs} />
+  {(['Exterior', 'Interior'] as const).map((g, i) => (
+    <section class={`py-14 md:py-20 ${i === 1 ? 'bg-surface-alt' : ''}`} aria-labelledby={`group-${g}`}>
+      <div class="container-site">
+        <h2 id={`group-${g}`}>{g}</h2>
+        <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {servicesByGroup(g).map((s) => <li><ServiceCard service={s} /></li>)}
+        </ul>
+      </div>
+    </section>
+  ))}
+  <CTABand />
+</BaseLayout>

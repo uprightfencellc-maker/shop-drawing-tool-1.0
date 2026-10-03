@@ -1,0 +1,6 @@
+---
+/** Visible placeholder for a fact the client has not confirmed yet. */
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<span class="todo" data-todo={label}>[{label} — TBD]</span>

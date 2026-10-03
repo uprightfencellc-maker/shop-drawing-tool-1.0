@@ -1,0 +1,75 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import CTABand from '../components/CTABand.astro';
+import Todo from '../components/Todo.astro';
+import { projects, services } from '../lib/site';
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/projects/*.{jpg,jpeg,png,webp}', { eager: true });
+const img = (name: string | null) => (name ? files[`../assets/projects/${name}`]?.default : undefined);
+const serviceName = (slug: string | null) => services.find((s) => s.slug === slug)?.name;
+const usedServices = services.filter((s) => projects.some((p) => p.service === s.slug));
+---
+<BaseLayout
+  title="Project Gallery | Gebhart Construction, Huber Heights OH"
+  description="Photos of roofing, siding and remodeling work by Gebhart Construction in the Huber Heights and Dayton area."
+>
+  <PageHeader title="Our projects" lead="Our projects come in a variety of shapes and sizes based on the needs of our customers." crumbs={[{ name: 'Projects', href: '/projects/' }]} />
+
+  <section class="py-14 md:py-20">
+    <div class="container-site">
+      {usedServices.length > 1 && (
+        <fieldset class="mb-8" data-filters>
+          <legend class="font-semibold">Filter by service</legend>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <button type="button" class="btn btn-outline-dark aria-pressed:bg-brand aria-pressed:text-on-brand" aria-pressed="true" data-filter="all">All</button>
+            {usedServices.map((s) => (
+              <button type="button" class="btn btn-outline-dark aria-pressed:bg-brand aria-pressed:text-on-brand" aria-pressed="false" data-filter={s.slug}>{s.name}</button>
+            ))}
+          </div>
+        </fieldset>
+      )}
+      <p class="sr-only" aria-live="polite" data-filter-status></p>
+
+      <ul class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" data-gallery>
+        {projects.map((p) => {
+          const before = img(p.before), after = img(p.after), single = img(p.image);
+          return (
+            <li data-service={p.service ?? 'none'}>
+              <figure>
+                {before && after
+                  ? <BeforeAfter before={before} after={after} alt={p.alt} id={`ba-${p.id}`} />
+                  : single && <Image src={single} alt={p.alt} widths={[400, 640]} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" class="h-auto w-full rounded-lg" />}
+                <figcaption class="mt-3">
+                  <span class="font-semibold">{p.title}</span>
+                  <span class="block text-sm text-muted">
+                    {serviceName(p.service) ?? <Todo label="SERVICE" />} · {p.city ?? <Todo label="CITY" />}
+                  </span>
+                </figcaption>
+              </figure>
+            </li>
+          );
+        })}
+      </ul>
+
+      <p class="mt-12 rounded-lg bg-surface-alt p-6"><Todo label="MORE PROJECT PHOTOS" /> Full-size photos and before/after pairs are coming from Ryan.</p>
+    </div>
+  </section>
+  <CTABand />
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLElement>('[data-gallery] > li');
+  const status = document.querySelector('[data-filter-status]');
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.filter!;
+    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    let shown = 0;
+    items.forEach((li) => { const on = f === 'all' || li.dataset.service === f; li.hidden = !on; if (on) shown++; });
+    if (status) status.textContent = `Showing ${shown} project${shown === 1 ? '' : 's'}`;
+  }));
+</script>

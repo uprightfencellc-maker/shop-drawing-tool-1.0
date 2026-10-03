@@ -1,0 +1,21 @@
+---
+import { business, telHref, smsHref } from '../lib/site';
+interface Props { heading?: string; text?: string }
+const {
+  heading = 'Get your free estimate',
+  text = 'Tell us about your project. Ryan will get back to you.',
+} = Astro.props;
+---
+<section class="on-brand py-14" aria-labelledby="cta-heading">
+  <div class="container-site flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 id="cta-heading">{heading}</h2>
+      <p class="mt-2 text-on-brand-muted">{text}</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a class="btn btn-primary" href="/contact/">Request a free estimate</a>
+      <a class="btn btn-outline-light" href={telHref}>Call {business.phone.display}</a>
+      <a class="btn btn-outline-light" href={smsHref}>Text us</a>
+    </div>
+  </div>
+</section>

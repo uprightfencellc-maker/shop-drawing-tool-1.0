@@ -1,0 +1,73 @@
+@import "@fontsource/archivo/700.css";
+@import "@fontsource/archivo/800.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/600.css";
+@import "./tokens.css";
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand: var(--color-brand);
+  --color-accent: var(--color-accent);
+  --color-accent-ink: var(--color-accent-ink);
+  --color-link: var(--color-link);
+  --color-surface: var(--color-surface);
+  --color-surface-alt: var(--color-surface-alt);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-on-brand: var(--color-on-brand);
+  --color-on-brand-muted: var(--color-on-brand-muted);
+  --font-heading: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    font-size: 112.5%; /* 18px body */
+    line-height: 1.6;
+    color: var(--color-ink);
+    background: var(--color-surface);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-brand);
+  }
+  h1 { font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.1rem); }
+  h2 { font-size: clamp(1.65rem, 1.4rem + 1vw, 2rem); }
+  h3 { font-size: 1.25rem; font-weight: 700; }
+  a { color: var(--color-link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible {
+    outline: 3px solid var(--color-link);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-brand :focus-visible { outline-color: var(--color-accent); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+}
+
+@layer components {
+  .container-site { @apply mx-auto max-w-6xl px-4 sm:px-6; }
+  .prose-site { max-width: 70ch; }
+  .prose-site p + p { margin-top: 1rem; }
+  .on-brand { background: var(--color-brand); color: var(--color-on-brand); }
+  .on-brand h1, .on-brand h2, .on-brand h3 { color: var(--color-on-brand); }
+  .on-brand a:not(.btn) { color: var(--color-on-brand); }
+  .btn {
+    @apply inline-flex min-h-11 text-center items-center justify-center gap-2 rounded-md px-5 py-2.5 font-semibold no-underline;
+  }
+  .btn-primary { background: var(--color-accent); color: var(--color-accent-ink); }
+  .btn-primary:hover { background: #fbbf24; }
+  .btn-outline-light { border: 2px solid var(--color-on-brand); color: var(--color-on-brand); }
+  .btn-outline-light:hover { background: rgb(255 255 255 / 0.1); }
+  .btn-outline-dark { border: 2px solid var(--color-brand); color: var(--color-brand); }
+  .btn-outline-dark:hover { background: var(--color-surface-alt); }
+  .todo {
+    @apply inline-block rounded px-1.5 font-semibold;
+    background: #fef3c7; color: #78350f; border: 1px dashed #92400e;
+  }
+}

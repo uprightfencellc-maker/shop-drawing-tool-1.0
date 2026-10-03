@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import CTABand from '../components/CTABand.astro';
+import Stars from '../components/Stars.astro';
+import { business, reviews, servicesByGroup, telHref, smsHref } from '../lib/site';
+import heroImg from '../assets/projects/interior-project-kitchen-living-room-01.jpg';
+
+const featured = ['Jonathan L.', 'Andrea B.', 'Darla B.']
+  .map((n) => reviews.find((r) => r.author === n)!);
+---
+<BaseLayout
+  title="Roofing & Remodeling Contractor in Huber Heights, OH | Gebhart Construction"
+  description="Roofing, siding, kitchens, baths and basements from Gebhart Construction in Huber Heights, OH. 5.0 stars on Google. Free estimates. Call or text (937) 559-7385."
+>
+  <section class="on-brand overflow-hidden">
+    <div class="container-site grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.2fr_1fr]">
+      <div>
+        <p class="font-semibold uppercase tracking-wider text-accent">Residential contractor · Huber Heights, OH</p>
+        <h1 class="mt-3">{business.tagline}</h1>
+        <p class="mt-4 max-w-xl text-lg text-on-brand-muted">{business.mission} {business.supportingLine}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contact/" class="btn btn-primary text-lg">Get a Free Estimate</a>
+          <a href={telHref} class="btn btn-outline-light">Call {business.phone.display}</a>
+          <a href={smsHref} class="btn btn-outline-light">Text us</a>
+        </div>
+        <a href="/reviews/" class="mt-8 inline-flex items-center gap-3 rounded-md bg-white/10 px-4 py-2 no-underline hover:bg-white/15">
+          <Stars class="text-accent" />
+          <span><strong>5.0</strong> on Google ({business.ratings.google.count} reviews)</span>
+        </a>
+      </div>
+      <Image src={heroImg} alt="Open kitchen and living room with a white island, granite countertop and wood-look floors"
+        widths={[400, 640]} sizes="(min-width: 1024px) 40vw, 100vw" loading="eager" fetchpriority="high"
+        class="h-auto w-full rounded-lg shadow-2xl" />
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24" aria-labelledby="services-heading">
+    <div class="container-site">
+      <h2 id="services-heading">What we do</h2>
+      <p class="mt-2 max-w-2xl text-muted">{business.supportingLine}</p>
+      {(['Exterior', 'Interior'] as const).map((g) => (
+        <div class="mt-10">
+          <h3 class="text-sm uppercase tracking-wider text-muted">{g}</h3>
+          <ul class="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {servicesByGroup(g).map((s) => <li><ServiceCard service={s} /></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-16 md:py-24" aria-labelledby="comm-heading">
+    <div class="container-site">
+      <h2 id="comm-heading">You'll always know where your project stands</h2>
+      <p class="mt-3 max-w-2xl text-lg text-muted">Customers bring it up in review after review: Ryan explains the process, returns calls and tells you each day what the goal is.</p>
+      <ol class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {business.howWeWork.map((step, i) => (
+          <li class="rounded-lg bg-white p-6 shadow-sm">
+            <span class="font-heading text-3xl font-extrabold text-link" aria-hidden="true">{i + 1}</span>
+            <h3 class="mt-2">{step.title}</h3>
+            <p class="mt-2 text-muted">{step.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24" aria-labelledby="reviews-heading">
+    <div class="container-site">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 id="reviews-heading">What customers say</h2>
+        <a href="/reviews/" class="font-semibold">Read all reviews</a>
+      </div>
+      <ul class="mt-8 grid gap-6 md:grid-cols-3">
+        {featured.map((r) => <li><ReviewCard review={r} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-16 md:py-24" aria-labelledby="projects-heading">
+    <div class="container-site">
+      <h2 id="projects-heading">Recent projects</h2>
+      <p class="mt-3 max-w-2xl text-muted">Our projects come in a variety of shapes and sizes based on the needs of our customers.</p>
+      <a href="/projects/" class="btn btn-outline-dark mt-6">See our projects</a>
+    </div>
+  </section>
+
+  <CTABand />
+</BaseLayout>

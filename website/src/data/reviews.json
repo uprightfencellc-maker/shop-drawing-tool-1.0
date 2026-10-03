@@ -1,0 +1,26 @@
+{
+  "_note": "LAUNCH BLOCKER: Ryan's okay to publish these named reviews. Source: Angi, as quoted in the client handoff (may be excerpts; '…' marks trimmed text). Add the 22 Google reviews here when the full text is available.",
+  "publishApproved": false,
+  "reviews": [
+    { "author": "Jonathan L.", "source": "Angi", "date": "2025-05", "project": "Roof replacement", "tags": ["roofing"], "rating": 5,
+      "text": "Ryan was fantastic to work with. He was a good communicator and helped me understand the process." },
+    { "author": "Darla B.", "source": "Angi", "date": "2025-04", "project": "Home repairs", "tags": ["home-repairs"], "rating": 5,
+      "text": "Ryan was prompt, professional and did an excellent job. Completed the jobs, meeting our expectations and stuck to the quoted estimate." },
+    { "author": "Dee M.", "source": "Angi", "date": "2025-04", "project": "Home repairs", "tags": ["home-repairs"], "rating": 5,
+      "text": "His communication regarding possible scenarios to consider…was much appreciated…They did an excellent job." },
+    { "author": "Megan A.", "source": "Angi", "date": "2025-02", "project": "Home repairs", "tags": ["home-repairs"], "rating": 5,
+      "text": "Ryan was not only a joy to work with, but his craftsmanship and attention to detail is top notch." },
+    { "author": "Denise M.", "source": "Angi", "date": "2025-02", "project": "Roofing", "tags": ["roofing"], "rating": 5,
+      "text": "Ryan did a great job on the roof!…He is very detail oriented and great to work with!" },
+    { "author": "Andrea B.", "source": "Angi", "date": "2025-02", "project": "Bathroom remodel", "tags": ["bathroom"], "rating": 5,
+      "text": "Each day Mr. Gebhart communicated the goals of the day and accomplished them." },
+    { "author": "Richard Z.", "source": "Angi", "date": "2025-02", "project": "Flat roof", "tags": ["roofing"], "rating": 5,
+      "text": "Ryan's company replaced our flat roof membrane…Now the room is dry, and became the most popular room." },
+    { "author": "Darleen R.", "source": "Angi", "date": "2025-02", "project": "Kitchen remodel", "tags": ["kitchen"], "rating": 5,
+      "text": "He always answered my calls or returned them in a timely manner which is very important to me." },
+    { "author": "Ted R.", "source": "Angi", "date": "2025-02", "project": "Home repairs", "tags": ["home-repairs"], "rating": 5,
+      "text": "Ryan was a clear communicator and did the job to my satisfaction." },
+    { "author": "Joe C.", "source": "Angi", "date": "2025-02", "project": "Roofing", "tags": ["roofing"], "rating": 5,
+      "text": "Great work, honest, and professional—there aren't too many contractors like Gebhart Construction around." }
+  ]
+}

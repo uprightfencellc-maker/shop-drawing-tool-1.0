@@ -1,0 +1,10 @@
+---
+import { telHref, smsHref } from '../lib/site';
+---
+<nav aria-label="Quick contact" class="on-brand fixed inset-x-0 bottom-0 z-40 border-t border-white/15 md:hidden">
+  <ul class="grid grid-cols-3">
+    <li><a href={telHref} class="flex min-h-14 items-center justify-center font-semibold no-underline">Call</a></li>
+    <li class="border-x border-white/15"><a href={smsHref} class="flex min-h-14 items-center justify-center font-semibold no-underline">Text</a></li>
+    <li><a href="/contact/" class="flex min-h-14 items-center justify-center bg-accent font-semibold !text-accent-ink no-underline">Free Estimate</a></li>
+  </ul>
+</nav>

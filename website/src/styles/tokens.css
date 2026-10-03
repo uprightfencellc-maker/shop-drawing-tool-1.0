@@ -1,0 +1,13 @@
+/* Brand colors. Change values here only. See CLAUDE.md for the contrast table. */
+:root {
+  --color-brand: #1e293b;
+  --color-accent: #f59e0b;
+  --color-accent-ink: #1e293b;
+  --color-link: #92400e;
+  --color-surface: #faf8f5;
+  --color-surface-alt: #f1ede6;
+  --color-ink: #1f2937;
+  --color-muted: #4b5563;
+  --color-on-brand: #ffffff;
+  --color-on-brand-muted: #cbd5e1;
+}

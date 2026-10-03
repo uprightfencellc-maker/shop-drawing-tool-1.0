@@ -1,0 +1,24 @@
+---
+/** Keyboard-accessible before/after comparison built on a native range input. */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { before: ImageMetadata; after: ImageMetadata; alt: string; id: string }
+const { before, after, alt, id } = Astro.props;
+---
+<div class="ba relative overflow-hidden rounded-lg" data-ba style="--pos: 50%">
+  <Image src={after} alt={`After: ${alt}`} widths={[480, 960]} sizes="(min-width: 768px) 50vw, 100vw" class="block h-auto w-full" />
+  <div class="absolute inset-0" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0)">
+    <Image src={before} alt={`Before: ${alt}`} widths={[480, 960]} sizes="(min-width: 768px) 50vw, 100vw" class="block h-full w-full object-cover" />
+  </div>
+  <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 w-1 -translate-x-1/2 bg-white shadow" style="left: var(--pos)"></div>
+  <span aria-hidden="true" class="absolute left-2 top-2 rounded bg-brand px-2 py-0.5 text-sm font-semibold text-on-brand">Before</span>
+  <span aria-hidden="true" class="absolute right-2 top-2 rounded bg-brand px-2 py-0.5 text-sm font-semibold text-on-brand">After</span>
+  <label for={id} class="sr-only">Before and after comparison: slide to reveal more of the before photo</label>
+  <input id={id} type="range" min="0" max="100" value="50" class="absolute inset-x-0 bottom-3 mx-auto w-3/4 accent-[var(--color-accent)]" />
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((el) => {
+    const input = el.querySelector('input')!;
+    input.addEventListener('input', () => el.style.setProperty('--pos', `${input.value}%`));
+  });
+</script>

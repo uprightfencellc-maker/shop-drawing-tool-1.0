@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Todo from '../components/Todo.astro';
+import { business, services, telHref, smsHref, mailHref, hoursRows, fullAddress, mapEmbedSrc } from '../lib/site';
+const field = 'mt-1 block w-full rounded-md border border-[#6b7280] bg-white px-3 py-2.5 text-ink aria-[invalid=true]:border-red-700 aria-[invalid=true]:border-2';
+---
+<BaseLayout
+  title="Free Estimate & Contact | Gebhart Construction, Huber Heights OH"
+  description="Request a free estimate from Gebhart Construction. Call or text (937) 559-7385, email, or send photos of your project with the form."
+>
+  <PageHeader title="Get a free estimate" lead="Tell us about your project. Photos help Ryan give you a better answer." crumbs={[{ name: 'Contact', href: '/contact/' }]} />
+
+  <section class="py-14 md:py-20">
+    <div class="container-site grid gap-12 lg:grid-cols-[3fr_2fr]">
+      <div>
+        <h2 class="text-2xl">Estimate request</h2>
+        <p class="mt-2 text-muted">Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required.</p>
+
+        <div id="form-errors" class="mt-4 hidden rounded-md border-2 border-red-700 bg-red-50 p-4 text-red-900" role="alert" tabindex="-1"></div>
+
+        <form name="estimate" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field"
+          enctype="multipart/form-data" class="mt-6 space-y-5" id="estimate-form">
+          <input type="hidden" name="form-name" value="estimate" />
+          <p class="hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="f-name" class="font-semibold">Name <span aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required class={field} aria-describedby="f-name-err" />
+              <p id="f-name-err" class="mt-1 text-sm font-semibold text-red-800" hidden>Enter your name.</p>
+            </div>
+            <div>
+              <label for="f-phone" class="font-semibold">Phone <span aria-hidden="true">*</span></label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" required class={field} aria-describedby="f-phone-err" />
+              <p id="f-phone-err" class="mt-1 text-sm font-semibold text-red-800" hidden>Enter a phone number so Ryan can reach you.</p>
+            </div>
+          </div>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="f-email" class="font-semibold">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" class={field} aria-describedby="f-email-err" />
+              <p id="f-email-err" class="mt-1 text-sm font-semibold text-red-800" hidden>Enter a valid email address, like name@example.com.</p>
+            </div>
+            <div>
+              <label for="f-service" class="font-semibold">Service</label>
+              <select id="f-service" name="service" class={field}>
+                <option value="">Choose one</option>
+                {services.map((s) => <option value={s.slug}>{s.name}</option>)}
+                <option value="other">Something else</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="f-address" class="font-semibold">Project address</label>
+            <input id="f-address" name="address" type="text" autocomplete="street-address" class={field} />
+          </div>
+          <div>
+            <label for="f-message" class="font-semibold">Tell us about the project</label>
+            <textarea id="f-message" name="message" rows="5" class={field}></textarea>
+          </div>
+          <div>
+            <label for="f-photos" class="font-semibold">Photos (optional)</label>
+            <p id="f-photos-hint" class="text-sm text-muted">Up to 3 photos. Large photos are shrunk on your device before sending.</p>
+            <input id="f-photos" name="photos" type="file" accept="image/*" multiple class="mt-2 block w-full text-ink file:mr-3 file:min-h-11 file:rounded-md file:border-0 file:bg-brand file:px-4 file:font-semibold file:text-on-brand" aria-describedby="f-photos-hint f-photos-err" />
+            <p id="f-photos-err" class="mt-1 text-sm font-semibold text-red-800" hidden>Choose 3 photos or fewer.</p>
+          </div>
+          <button type="submit" class="btn btn-primary text-lg">Send my estimate request</button>
+          <p id="form-status" class="text-muted" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <aside aria-labelledby="reach-heading" class="space-y-8">
+        <div class="rounded-lg bg-surface-alt p-6">
+          <h2 id="reach-heading" class="text-xl">Prefer to call or text?</h2>
+          <div class="mt-4 flex flex-col gap-3">
+            <a href={telHref} class="btn btn-primary">Call {business.phone.display}</a>
+            <a href={smsHref} class="btn btn-outline-dark">Text {business.phone.display}</a>
+            <a href={mailHref} class="btn btn-outline-dark">Email us</a>
+            <p class="text-center text-sm text-muted break-all">{business.email}</p>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-xl">Hours</h2>
+          <dl class="mt-3 divide-y divide-black/10">
+            {hoursRows.map((h) => (
+              <div class="flex justify-between gap-4 py-2">
+                <dt class="font-semibold">{h.days}</dt>
+                <dd class="text-right">
+                  {h.closed ? 'Closed' : !h.opens && !h.closes ? <Todo label="HOURS" /> : (
+                    <>{h.opens ?? <Todo label="OPEN" />} – {h.closes ?? <Todo label="CLOSE" />}</>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div>
+          <h2 class="text-xl">Location</h2>
+          <address class="mt-2 not-italic">{fullAddress}</address>
+          <iframe src={mapEmbedSrc} title={`Map showing ${fullAddress}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            class="mt-4 aspect-[4/3] w-full rounded-lg border-0"></iframe>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('estimate-form') as HTMLFormElement;
+  const summary = document.getElementById('form-errors')!;
+  const status = document.getElementById('form-status')!;
+  const MAX_FILES = 3, MAX_SIDE = 1600, QUALITY = 0.8;
+  form.noValidate = true;
+
+  const params = new URLSearchParams(location.search);
+  const pre = params.get('service');
+  const select = form.querySelector<HTMLSelectElement>('#f-service')!;
+  if (pre && [...select.options].some((o) => o.value === pre)) select.value = pre;
+
+  function setError(id: string, bad: boolean) {
+    const input = document.getElementById(id)!;
+    input.setAttribute('aria-invalid', String(bad));
+    (document.getElementById(`${id}-err`) as HTMLElement).hidden = !bad;
+  }
+
+  function validate() {
+    const errs: { id: string; msg: string }[] = [];
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
+    const phone = (form.elements.namedItem('phone') as HTMLInputElement).value.replace(/\D/g, '');
+    const email = form.elements.namedItem('email') as HTMLInputElement;
+    const photos = form.elements.namedItem('photos') as HTMLInputElement;
+    const checks: [string, boolean, string][] = [
+      ['f-name', !name, 'Enter your name.'],
+      ['f-phone', phone.length < 10, 'Enter a phone number so Ryan can reach you.'],
+      ['f-email', email.value !== '' && !email.checkValidity(), 'Enter a valid email address.'],
+      ['f-photos', (photos.files?.length ?? 0) > MAX_FILES, 'Choose 3 photos or fewer.'],
+    ];
+    for (const [id, bad, msg] of checks) { setError(id, bad); if (bad) errs.push({ id, msg }); }
+    if (errs.length) {
+      summary.innerHTML = `<p class="font-semibold">Please fix ${errs.length === 1 ? 'this' : 'these'}:</p><ul class="mt-2 list-disc pl-5">${
+        errs.map((e) => `<li><a href="#${e.id}" class="!text-red-900">${e.msg}</a></li>`).join('')}</ul>`;
+      summary.classList.remove('hidden');
+      summary.focus();
+    } else {
+      summary.classList.add('hidden');
+    }
+    return errs.length === 0;
+  }
+
+  async function shrink(file: File): Promise<Blob> {
+    if (!file.type.startsWith('image/')) return file;
+    try {
+      const bmp = await createImageBitmap(file);
+      const scale = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(bmp.width * scale);
+      canvas.height = Math.round(bmp.height * scale);
+      canvas.getContext('2d')!.drawImage(bmp, 0, 0, canvas.width, canvas.height);
+      const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, 'image/jpeg', QUALITY));
+      return blob && blob.size < file.size ? blob : file;
+    } catch {
+      return file; // e.g. HEIC the browser can't decode: send as is
+    }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    btn.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const data = new FormData(form);
+      const files = (form.elements.namedItem('photos') as HTMLInputElement).files;
+      data.delete('photos');
+      if (files) for (const f of [...files]) {
+        const small = await shrink(f);
+        data.append('photos', small, f.name.replace(/\.\w+$/, '') + '.jpg');
+      }
+      const res = await fetch('/', { method: 'POST', body: data });
+      if (!res.ok) throw new Error(String(res.status));
+      location.href = '/thanks/';
+    } catch {
+      status.textContent = '';
+      summary.innerHTML = '<p class="font-semibold">Your request did not go through. Please call or text (937) 559-7385, or try again.</p>';
+      summary.classList.remove('hidden');
+      summary.focus();
+      btn.disabled = false;
+    }
+  });
+</script>

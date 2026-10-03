@@ -1,0 +1,106 @@
+{
+  "name": "Gebhart Construction",
+  "owner": "Ryan Gebhart",
+  "category": "Residential general contractor",
+  "tagline": "Quality Work. Honest Service. Great Value.",
+  "mission": "Dedicated to constructing trust, one project at a time.",
+  "supportingLine": "From roofing and siding to kitchens, basements and baths, no project is too big or too small.",
+  "phone": {
+    "display": "(937) 559-7385",
+    "e164": "+19375597385"
+  },
+  "email": "gebhartconst@gmail.com",
+  "address": {
+    "_note": "LAUNCH BLOCKER: handoff says 7715 Beldale Dr, Huber Heights; Angi says 775 Beldale Ave, Dayton. Confirm with Ryan.",
+    "street": "7715 Beldale Dr",
+    "city": "Huber Heights",
+    "region": "OH",
+    "postalCode": "45424",
+    "country": "US"
+  },
+  "hours": [
+    {
+      "days": "Monday",
+      "display": null,
+      "opens": "08:00",
+      "closes": null
+    },
+    {
+      "days": "Tuesday",
+      "display": null,
+      "opens": null,
+      "closes": null
+    },
+    {
+      "days": "Wednesday",
+      "display": null,
+      "opens": null,
+      "closes": null
+    },
+    {
+      "days": "Thursday",
+      "display": null,
+      "opens": null,
+      "closes": null
+    },
+    {
+      "days": "Friday",
+      "display": null,
+      "opens": null,
+      "closes": null
+    },
+    {
+      "days": "Saturday",
+      "display": null,
+      "opens": null,
+      "closes": "14:00"
+    },
+    {
+      "days": "Sunday",
+      "display": "Closed",
+      "opens": null,
+      "closes": null
+    }
+  ],
+  "ratings": {
+    "google": {
+      "value": 5.0,
+      "count": 22,
+      "reviewUrl": null
+    },
+    "angi": {
+      "value": 5.0,
+      "count": 10,
+      "url": "https://www.angi.com/companylist/us/oh/dayton/gebhart-construction-llc-reviews-1.htm"
+    }
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/p/Gebhart-Construction-100057615453261/",
+    "instagram": "https://www.instagram.com/constructiongypse/"
+  },
+  "freeEstimates": true,
+  "payment": "Credit cards accepted",
+  "serviceArea": null,
+  "yearsInBusiness": null,
+  "licenseInsurance": null,
+  "bio": null,
+  "headshot": null,
+  "howWeWork": [
+    {
+      "title": "Free estimate",
+      "body": "Estimates are free. Ryan explains the process so you know what to expect."
+    },
+    {
+      "title": "A quote he sticks to",
+      "body": "You get a quote before work starts. Customers say he stays with it."
+    },
+    {
+      "title": "Daily updates",
+      "body": "Each day you hear the goals for the day. Calls get answered or returned."
+    },
+    {
+      "title": "Attention to detail",
+      "body": "The job is done carefully from start to finish."
+    }
+  ]
+}
