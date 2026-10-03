@@ -19,28 +19,44 @@ Every agent working in `website/` follows this file. Do not touch anything outsi
 
 ## Palette (design tokens)
 
-**PENDING:** colors and logo will match the current gebhartconstruction.com. Values come from the client's screenshot. Until then the tokens below hold neutral placeholder values. Change colors **only** here and in `src/styles/tokens.css`; components use the Tailwind names, never raw hex.
+Chosen palette: charcoal slate, amber accent, warm off-white. It replaces the plan to match the current site (owner's call, 2026-10-03). Set colors **only** here and in `src/styles/tokens.css`; components use the Tailwind names, never raw hex. If Ryan later supplies brand colors, swap them in the tokens and re-run the contrast check.
 
 | Token | Tailwind name | Use | Value |
 |---|---|---|---|
-| `--color-brand` | `brand` | Header/footer background, headings | `PENDING-SCREENSHOT` |
-| `--color-accent` | `accent` | Primary buttons, links, highlights | `PENDING-SCREENSHOT` |
-| `--color-accent-ink` | `accent-ink` | Text on accent buttons | `PENDING-SCREENSHOT` |
-| `--color-surface` | `surface` | Page background | `PENDING-SCREENSHOT` |
-| `--color-surface-alt` | `surface-alt` | Alternating section bands | `PENDING-SCREENSHOT` |
-| `--color-ink` | `ink` | Body text | `PENDING-SCREENSHOT` |
-| `--color-muted` | `muted` | Secondary text | `PENDING-SCREENSHOT` |
+| `--color-brand` | `brand` | Header/footer/hero background, headings on light | `#1E293B` |
+| `--color-accent` | `accent` | Primary button fill, highlights on dark | `#F59E0B` |
+| `--color-accent-ink` | `accent-ink` | Text on accent buttons | `#1E293B` |
+| `--color-link` | `link` | Text links on light backgrounds | `#92400E` |
+| `--color-surface` | `surface` | Page background | `#FAF8F5` |
+| `--color-surface-alt` | `surface-alt` | Alternating section bands | `#F1EDE6` |
+| `--color-ink` | `ink` | Body text | `#1F2937` |
+| `--color-muted` | `muted` | Secondary text | `#4B5563` |
+| `--color-on-brand` | `on-brand` | Text on brand (dark) backgrounds | `#FFFFFF` |
+| `--color-on-brand-muted` | `on-brand-muted` | Secondary text on brand | `#CBD5E1` |
 
-Contrast rules (checked when values are set): body text ≥ 4.5:1 on its background; large text (≥ 24px, or ≥ 18.66px bold) and UI borders/icons ≥ 3:1. If a brand color fails as text, use it for fills only and pick a darker shade for text.
+Checked contrast (WCAG 2.1 AA needs 4.5:1 for normal text, 3:1 for large text and UI):
+
+| Pair | Ratio |
+|---|---|
+| ink on surface / surface-alt | 13.85 / 12.58 |
+| muted on surface / surface-alt | 7.13 / 6.48 |
+| link on surface / surface-alt | 6.69 / 6.08 |
+| accent-ink on accent (button text) | 6.81 |
+| on-brand on brand | 14.63 |
+| on-brand-muted on brand | 9.85 |
+| accent on brand (text/icons on dark) | 6.81 |
+| brand on surface (headings) | 13.80 |
+
+**Never use `accent` (amber) as text, icons, or borders on light backgrounds:** it is only 2.03:1 on surface. On light sections, amber appears only as a button fill with `accent-ink` text; use `link` for colored text.
 
 ## Logo
 
-- `src/assets/logo.svg` (or PNG at 2x if no vector exists). PENDING from the client.
+- `src/assets/logo.svg` (or PNG at 2x if no vector exists). PENDING from the client; optional.
 - Header logo links to `/`, with `alt="Gebhart Construction home"`. Until the file arrives, use a text wordmark "GEBHART CONSTRUCTION" in the heading font.
 
 ## Typography
 
-PENDING the screenshot. If the current site's fonts can be identified, use them; otherwise the defaults are:
+Fonts:
 - Headings: bold sans-serif (default **Archivo**, 700/800), self-hosted via `@fontsource`, no Google Fonts CDN.
 - Body: **Inter**, 400/600, self-hosted.
 - Scale: body 18px / 1.6 line height; H1 40–56px (clamp), H2 30–36px, H3 22–24px. Max line length about 70ch.
@@ -88,5 +104,5 @@ PENDING the screenshot. If the current site's fonts can be identified, use them;
 
 1. Address house number: the handoff says 7715 Beldale Dr, Huber Heights; Angi says 775 Beldale Ave, Dayton.
 2. Ryan's okay to publish named reviews.
-3. Colors, logo, and fonts from the screenshot.
+3. Logo file (text wordmark until then).
 4. Every `TODO-CLIENT` placeholder: service area, years in business, license/insurance, weekday hours, bio/headshot, photos.
