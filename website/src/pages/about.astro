@@ -8,7 +8,8 @@ import { business } from '../lib/site';
 <BaseLayout
   title="About Ryan Gebhart | Gebhart Construction, Huber Heights OH"
   description="Gebhart Construction is run by Ryan Gebhart in Huber Heights, OH. Customers know him for clear communication, daily updates and sticking to the quote."
->
+
+  crumbs={[{ name: 'About', href: '/about/' }]}>
   <PageHeader title="About Gebhart Construction" lead={business.mission} crumbs={[{ name: 'About', href: '/about/' }]} />
 
   <section class="py-14 md:py-20">
@@ -18,7 +19,7 @@ import { business } from '../lib/site';
       </div>
       <div class="prose-site">
         <h2>Meet Ryan</h2>
-        <p class="mt-4">Gebhart Construction is owned by {business.owner}. When you hire Gebhart Construction, Ryan is the person you deal with.</p>
+        <p class="mt-4">Gebhart Construction is owned by {business.owner}.</p>
         <p><Todo label="RYAN'S BIO" /></p>
         <dl class="mt-8 grid gap-4 sm:grid-cols-2">
           <div class="rounded-lg bg-surface-alt p-4"><dt class="text-sm font-semibold text-muted">Years in business</dt><dd class="mt-1"><Todo label="YEARS IN BUSINESS" /></dd></div>

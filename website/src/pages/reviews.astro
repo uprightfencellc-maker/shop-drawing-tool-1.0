@@ -10,8 +10,9 @@ const g = business.ratings.google, a = business.ratings.angi;
 ---
 <BaseLayout
   title="Customer Reviews | Gebhart Construction, Huber Heights OH"
-  description={`Gebhart Construction is rated ${g.value.toFixed(1)} stars on Google (${g.count} reviews) and ${a.value.toFixed(1)} on Angi (${a.count} reviews). Read what customers say.`}
->
+  description={`Gebhart Construction is rated ${g.value.toFixed(1)} stars on Google (${g.count} reviews) and ${a.value.toFixed(1)} on Angi (${a.count} reviews). Read what customers say about working with Ryan Gebhart.`}
+
+  crumbs={[{ name: 'Reviews', href: '/reviews/' }]}>
   <PageHeader title="Customer reviews" lead="What customers say about working with Ryan." crumbs={[{ name: 'Reviews', href: '/reviews/' }]} />
 
   <section class="py-14 md:py-20">

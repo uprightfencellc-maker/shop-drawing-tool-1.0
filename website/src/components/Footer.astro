@@ -12,14 +12,14 @@ const year = new Date().getFullYear();
         {business.address.street}<br />
         {business.address.city}, {business.address.region} {business.address.postalCode}
       </address>
-      <p class="mt-3"><a href={telHref} class="font-semibold">{business.phone.display}</a> · <a href={smsHref}>Text</a></p>
-      <p class="mt-1"><a href={mailHref} class="break-all">{business.email}</a></p>
+      <p class="mt-2"><a href={telHref} class="inline-block py-2 font-semibold">{business.phone.display}</a> · <a href={smsHref} class="inline-block py-2">Text</a></p>
+      <p><a href={mailHref} class="inline-block py-2 break-all">{business.email}</a></p>
     </div>
     <div>
       <h2 class="text-base">Services</h2>
-      <ul class="mt-3 space-y-1.5">
+      <ul class="mt-2">
         {servicesByGroup('Exterior').concat(servicesByGroup('Interior')).map((s) => (
-          <li><a href={`/services/${s.slug}/`} class="!text-on-brand-muted">{s.name}</a></li>
+          <li><a href={`/services/${s.slug}/`} class="inline-block py-2 !text-on-brand-muted">{s.name}</a></li>
         ))}
       </ul>
     </div>
@@ -42,10 +42,10 @@ const year = new Date().getFullYear();
       <h2 class="text-base">Service area</h2>
       <p class="mt-3"><Todo label="SERVICE AREA" /></p>
       <h2 class="mt-6 text-base">Follow us</h2>
-      <ul class="mt-3 space-y-1.5">
-        <li><a href={business.social.facebook} rel="noopener">Facebook</a></li>
-        <li><a href={business.social.instagram} rel="noopener">Instagram</a></li>
-        <li><a href={business.ratings.angi.url} rel="noopener">Angi reviews</a></li>
+      <ul class="mt-2">
+        <li><a href={business.social.facebook} rel="noopener" class="inline-block py-2">Facebook</a></li>
+        <li><a href={business.social.instagram} rel="noopener" class="inline-block py-2">Instagram</a></li>
+        <li><a href={business.ratings.angi.url} rel="noopener" class="inline-block py-2">Angi reviews</a></li>
       </ul>
     </div>
   </div>

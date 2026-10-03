@@ -12,7 +12,7 @@ const featured = ['Jonathan L.', 'Andrea B.', 'Darla B.']
   .map((n) => reviews.find((r) => r.author === n)!);
 ---
 <BaseLayout
-  title="Roofing & Remodeling Contractor in Huber Heights, OH | Gebhart Construction"
+  title="Roofing & Remodeling in Huber Heights, OH | Gebhart Construction"
   description="Roofing, siding, kitchens, baths and basements from Gebhart Construction in Huber Heights, OH. 5.0 stars on Google. Free estimates. Call or text (937) 559-7385."
 >
   <section class="on-brand overflow-hidden">
@@ -72,7 +72,7 @@ const featured = ['Jonathan L.', 'Andrea B.', 'Darla B.']
     <div class="container-site">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h2 id="reviews-heading">What customers say</h2>
-        <a href="/reviews/" class="font-semibold">Read all reviews</a>
+        <a href="/reviews/" class="inline-block py-2 font-semibold">Read all reviews</a>
       </div>
       <ul class="mt-8 grid gap-6 md:grid-cols-3">
         {featured.map((r) => <li><ReviewCard review={r} /></li>)}

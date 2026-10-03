@@ -7,8 +7,9 @@ const field = 'mt-1 block w-full rounded-md border border-[#6b7280] bg-white px-
 ---
 <BaseLayout
   title="Free Estimate & Contact | Gebhart Construction, Huber Heights OH"
-  description="Request a free estimate from Gebhart Construction. Call or text (937) 559-7385, email, or send photos of your project with the form."
->
+  description="Request a free estimate from Gebhart Construction in Huber Heights, OH. Call or text (937) 559-7385, email us, or send photos of your project with the form."
+
+  crumbs={[{ name: 'Contact', href: '/contact/' }]}>
   <PageHeader title="Get a free estimate" lead="Tell us about your project. Photos help Ryan give you a better answer." crumbs={[{ name: 'Contact', href: '/contact/' }]} />
 
   <section class="py-14 md:py-20">
@@ -17,12 +18,12 @@ const field = 'mt-1 block w-full rounded-md border border-[#6b7280] bg-white px-
         <h2 class="text-2xl">Estimate request</h2>
         <p class="mt-2 text-muted">Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required.</p>
 
-        <div id="form-errors" class="mt-4 hidden rounded-md border-2 border-red-700 bg-red-50 p-4 text-red-900" role="alert" tabindex="-1"></div>
+        <div id="form-errors" class="mt-4 hidden rounded-md border-2 border-red-700 bg-red-50 p-4 text-red-900" tabindex="-1"></div>
 
         <form name="estimate" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field"
           enctype="multipart/form-data" class="mt-6 space-y-5" id="estimate-form">
           <input type="hidden" name="form-name" value="estimate" />
-          <p class="hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+          <p class="hidden"><label>Leave this empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
 
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
@@ -53,7 +54,7 @@ const field = 'mt-1 block w-full rounded-md border border-[#6b7280] bg-white px-
           </div>
           <div>
             <label for="f-address" class="font-semibold">Project address</label>
-            <input id="f-address" name="address" type="text" autocomplete="street-address" class={field} />
+            <input id="f-address" name="address" type="text" autocomplete="address-line1" class={field} />
           </div>
           <div>
             <label for="f-message" class="font-semibold">Tell us about the project</label>
@@ -61,7 +62,7 @@ const field = 'mt-1 block w-full rounded-md border border-[#6b7280] bg-white px-
           </div>
           <div>
             <label for="f-photos" class="font-semibold">Photos (optional)</label>
-            <p id="f-photos-hint" class="text-sm text-muted">Up to 3 photos. Large photos are shrunk on your device before sending.</p>
+            <p id="f-photos-hint" class="text-sm text-muted">Up to 3 photos, about 8 MB total. Large photos are shrunk on your device before sending.</p>
             <input id="f-photos" name="photos" type="file" accept="image/*" multiple class="mt-2 block w-full text-ink file:mr-3 file:min-h-11 file:rounded-md file:border-0 file:bg-brand file:px-4 file:font-semibold file:text-on-brand" aria-describedby="f-photos-hint f-photos-err" />
             <p id="f-photos-err" class="mt-1 text-sm font-semibold text-red-800" hidden>Choose 3 photos or fewer.</p>
           </div>

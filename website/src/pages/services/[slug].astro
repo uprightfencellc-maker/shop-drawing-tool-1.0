@@ -28,19 +28,10 @@ const jsonLd = [
     description: service.short,
     url,
     provider: { '@id': new URL('/#business', site).href },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: site.href },
-      { '@type': 'ListItem', position: 2, name: 'Services', item: new URL('/services/', site).href },
-      { '@type': 'ListItem', position: 3, name: service.name, item: url },
-    ],
-  },
+  }
 ];
 ---
-<BaseLayout title={service.metaTitle} description={service.metaDescription} jsonLd={jsonLd}>
+<BaseLayout title={service.metaTitle} description={service.metaDescription} jsonLd={jsonLd} crumbs={crumbs}>
   <PageHeader title={`${service.name} in Huber Heights, OH`} lead={service.short} crumbs={crumbs} />
 
   <section class="py-14 md:py-20">

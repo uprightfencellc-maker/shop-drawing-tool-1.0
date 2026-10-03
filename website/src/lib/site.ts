@@ -62,7 +62,6 @@ export const businessJsonLd = (site: URL) => ({
     postalCode: business.address.postalCode,
     addressCountry: business.address.country,
   },
-  founder: { '@type': 'Person', name: business.owner },
   paymentAccepted: 'Credit Card',
   aggregateRating: {
     '@type': 'AggregateRating',

@@ -4,21 +4,12 @@ import PageHeader from '../../components/PageHeader.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import CTABand from '../../components/CTABand.astro';
 import { business, servicesByGroup } from '../../lib/site';
-const site = Astro.site!;
 const crumbs = [{ name: 'Services', href: '/services/' }];
-const breadcrumbLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: site.href },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: new URL('/services/', site).href },
-  ],
-};
 ---
 <BaseLayout
-  title="Roofing, Siding & Remodeling Services in Huber Heights, OH | Gebhart Construction"
-  description="Roofing, siding, exterior repair, kitchen, bathroom and basement remodeling, and interior repair from Gebhart Construction in Huber Heights, OH. Free estimates."
-  jsonLd={[breadcrumbLd]}
+  title="Services in Huber Heights, OH | Gebhart Construction"
+  description="Roofing, siding, exterior repair, kitchen, bath and basement remodeling, and interior repair from Gebhart Construction in Huber Heights, OH. Free estimates."
+  crumbs={crumbs}
 >
   <PageHeader title="Our services" lead={business.supportingLine} crumbs={crumbs} />
   {(['Exterior', 'Interior'] as const).map((g, i) => (

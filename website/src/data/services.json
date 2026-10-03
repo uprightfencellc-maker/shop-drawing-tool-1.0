@@ -4,69 +4,102 @@
     "name": "Roofing",
     "group": "Exterior",
     "short": "Will work with you from start to finish, repair or replacement.",
-    "scope": ["Roof repair", "Roof replacement", "Asphalt shingle roofs", "Flat-roof membrane"],
-    "reviewTags": ["roofing"],
+    "scope": [
+      "Roof repair",
+      "Roof replacement",
+      "Asphalt shingle roofs",
+      "Flat-roof membrane"
+    ],
+    "reviewTags": [
+      "roofing"
+    ],
     "metaTitle": "Roofing Contractor in Huber Heights, OH | Gebhart Construction",
-    "metaDescription": "Roof repair and replacement in the Huber Heights and Dayton area. Asphalt shingle and flat-roof membrane. Free estimates. Call or text (937) 559-7385."
+    "metaDescription": "Roof repair and replacement in Huber Heights, OH: asphalt shingle and flat-roof membrane. Rated 5.0 on Google. Call or text (937) 559-7385 for a free estimate."
   },
   {
     "slug": "siding",
     "name": "Siding",
     "group": "Exterior",
     "short": "Choose your style and color, vinyl or Hardie board.",
-    "scope": ["Vinyl siding", "Hardie board (fiber cement) siding"],
+    "scope": [
+      "Vinyl siding",
+      "Hardie board (fiber cement) siding"
+    ],
     "reviewTags": [],
     "metaTitle": "Siding Contractor in Huber Heights, OH | Gebhart Construction",
-    "metaDescription": "Vinyl and Hardie board siding installed by Gebhart Construction in the Huber Heights and Dayton area. Free estimates. Call or text (937) 559-7385."
+    "metaDescription": "Vinyl and Hardie board siding from Gebhart Construction in Huber Heights, OH. Choose your style and color. Call or text (937) 559-7385 for a free estimate."
   },
   {
     "slug": "exterior-repair",
     "name": "Exterior Repair",
     "group": "Exterior",
     "short": "Painting, gutters, soffits. Whatever your exterior project, we can help.",
-    "scope": ["Exterior painting", "Gutters", "Soffits"],
+    "scope": [
+      "Exterior painting",
+      "Gutters",
+      "Soffits"
+    ],
     "reviewTags": [],
-    "metaTitle": "Exterior Repair in Huber Heights, OH: Gutters, Soffits, Painting | Gebhart Construction",
-    "metaDescription": "Gutters, soffits and exterior painting from Gebhart Construction in the Huber Heights and Dayton area. Free estimates. Call or text (937) 559-7385."
+    "metaTitle": "Exterior Repair in Huber Heights, OH | Gebhart Construction",
+    "metaDescription": "Gutters, soffits and exterior painting from Gebhart Construction in Huber Heights, OH. Rated 5.0 on Google. Call or text (937) 559-7385 for a free estimate."
   },
   {
     "slug": "kitchen-remodeling",
     "name": "Kitchen Remodeling",
     "group": "Interior",
     "short": "Allow us to turn your kitchen into the space of your dreams.",
-    "scope": ["Full kitchen remodels"],
-    "reviewTags": ["kitchen"],
+    "scope": [
+      "Full kitchen remodels"
+    ],
+    "reviewTags": [
+      "kitchen"
+    ],
     "metaTitle": "Kitchen Remodeling in Huber Heights, OH | Gebhart Construction",
-    "metaDescription": "Kitchen remodels from Gebhart Construction in the Huber Heights and Dayton area, with daily updates and work done to the quote. Free estimates."
+    "metaDescription": "Kitchen remodels from Gebhart Construction in Huber Heights, OH, with daily updates and work done to the quote. Call or text (937) 559-7385 for a free estimate."
   },
   {
     "slug": "bathroom-remodeling",
     "name": "Bathroom Remodeling",
     "group": "Interior",
     "short": "Whether you need a full bathroom remodel or just a new vanity, we can help.",
-    "scope": ["Full bathroom remodels", "Vanity replacement"],
-    "reviewTags": ["bathroom"],
+    "scope": [
+      "Full bathroom remodels",
+      "Vanity replacement"
+    ],
+    "reviewTags": [
+      "bathroom"
+    ],
     "metaTitle": "Bathroom Remodeling in Huber Heights, OH | Gebhart Construction",
-    "metaDescription": "Bathroom remodels and vanity swaps from Gebhart Construction in the Huber Heights and Dayton area. Free estimates. Call or text (937) 559-7385."
+    "metaDescription": "Full bathroom remodels and vanity swaps from Gebhart Construction in Huber Heights, OH. Rated 5.0 on Google. Call or text (937) 559-7385 for a free estimate."
   },
   {
     "slug": "basement-remodeling",
     "name": "Basement Remodeling",
     "group": "Interior",
     "short": "Basement finishing and remodeling.",
-    "scope": ["Basement finishing", "Basement remodeling"],
+    "scope": [
+      "Basement finishing",
+      "Basement remodeling"
+    ],
     "reviewTags": [],
     "metaTitle": "Basement Finishing in Huber Heights, OH | Gebhart Construction",
-    "metaDescription": "Basement finishing and remodeling from Gebhart Construction in the Huber Heights and Dayton area. Free estimates. Call or text (937) 559-7385."
+    "metaDescription": "Basement finishing and remodeling from Gebhart Construction in Huber Heights, OH. Rated 5.0 on Google. Call or text (937) 559-7385 for a free estimate today."
   },
   {
     "slug": "interior-repair",
     "name": "Interior Repair",
     "group": "Interior",
     "short": "Flooring, drywall repair, paint or tile. Call us for your interior needs.",
-    "scope": ["Flooring", "Drywall repair", "Interior painting", "Tile"],
-    "reviewTags": ["home-repairs"],
-    "metaTitle": "Interior Repair in Huber Heights, OH: Flooring, Drywall, Tile | Gebhart Construction",
-    "metaDescription": "Flooring, drywall repair, paint and tile from Gebhart Construction in the Huber Heights and Dayton area. Free estimates. Call or text (937) 559-7385."
+    "scope": [
+      "Flooring",
+      "Drywall repair",
+      "Interior painting",
+      "Tile"
+    ],
+    "reviewTags": [
+      "home-repairs"
+    ],
+    "metaTitle": "Interior Repair in Huber Heights, OH | Gebhart Construction",
+    "metaDescription": "Flooring, drywall repair, paint and tile from Gebhart Construction in Huber Heights, OH. Rated 5.0 on Google. Call or text (937) 559-7385 for a free estimate."
   }
 ]

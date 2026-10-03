@@ -15,8 +15,9 @@ const usedServices = services.filter((s) => projects.some((p) => p.service === s
 ---
 <BaseLayout
   title="Project Gallery | Gebhart Construction, Huber Heights OH"
-  description="Photos of roofing, siding and remodeling work by Gebhart Construction in the Huber Heights and Dayton area."
->
+  description="Photos of Gebhart Construction projects in Huber Heights, OH. More project photos, including before and after pairs, are on the way. Call (937) 559-7385."
+
+  crumbs={[{ name: 'Projects', href: '/projects/' }]}>
   <PageHeader title="Our projects" lead="Our projects come in a variety of shapes and sizes based on the needs of our customers." crumbs={[{ name: 'Projects', href: '/projects/' }]} />
 
   <section class="py-14 md:py-20">

@@ -10,12 +10,21 @@ interface Props {
   description: string;
   jsonLd?: object[];
   noindex?: boolean;
+  /** Inner-page trail (Home is added automatically); emits BreadcrumbList JSON-LD. */
+  crumbs?: { name: string; href: string }[];
 }
-const { title, description, jsonLd = [], noindex = false } = Astro.props;
+const { title, description, jsonLd = [], noindex = false, crumbs = [] } = Astro.props;
 const site = Astro.site!;
 const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL('/og-image.jpg', site).href;
-const ld = [businessJsonLd(site), ...jsonLd];
+const breadcrumbLd = crumbs.length > 0 && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [{ name: 'Home', href: '/' }, ...crumbs].map((c, i) => ({
+    '@type': 'ListItem', position: i + 1, name: c.name, item: new URL(c.href, site).href,
+  })),
+};
+const ld = [businessJsonLd(site), ...(breadcrumbLd ? [breadcrumbLd] : []), ...jsonLd];
 ---
 <!doctype html>
 <html lang="en">
@@ -24,8 +33,7 @@ const ld = [businessJsonLd(site), ...jsonLd];
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#1e293b" />
     <meta property="og:type" content="website" />
@@ -38,12 +46,12 @@ const ld = [businessJsonLd(site), ...jsonLd];
     {ld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
   </head>
   <body class="flex min-h-screen flex-col">
-    <a href="#main" class="sr-only z-50 rounded bg-accent px-4 py-3 font-semibold !text-accent-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to main content</a>
+    <a href="#main" data-inert-when-menu class="sr-only z-50 rounded bg-accent px-4 py-3 font-semibold !text-accent-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus-visible:outline-on-brand">Skip to main content</a>
     <Header />
-    <main id="main" tabindex="-1" class="flex-1 focus:outline-none">
+    <main id="main" tabindex="-1" class="flex-1 focus:outline-none" data-inert-when-menu>
       <slot />
     </main>
-    <Footer />
-    <MobileCallBar />
+    <div data-inert-when-menu><Footer /></div>
+    <div data-inert-when-menu class="call-bar-wrap"><MobileCallBar /></div>
   </body>
 </html>

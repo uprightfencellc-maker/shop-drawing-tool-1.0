@@ -45,6 +45,9 @@
     border-radius: 2px;
   }
   .on-brand :focus-visible { outline-color: var(--color-accent); }
+  .on-brand .bg-white :focus-visible { outline-color: var(--color-link); }
+  html.menu-open .call-bar-wrap { display: none; }
+  html.menu-open { overflow: hidden; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
